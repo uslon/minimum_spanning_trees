@@ -1,0 +1,3 @@
+Prim    21 Time: 0.0000728720
+Kruskal 21 Time: 0.0000252550
+Boruvka 21 Time: 0.0000726340
