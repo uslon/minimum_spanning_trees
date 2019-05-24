@@ -1,4 +1,4 @@
-Prim     21 Time: 0.0000600320
-Kruskal  21 Time: 0.0000187760
-Boruvka  21 Time: 0.0000497000
-Log star 21 Time: 0.0001258030
+Prim     21 Time: 0.0000559710
+Kruskal  21 Time: 0.0000215750
+Boruvka  21 Time: 0.0000496580
+Log star 21 Time: 0.0001455610
