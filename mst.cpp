@@ -22,6 +22,17 @@ vector <pair <long long, pair <long long, long long> > > edges;
 vector <int> dsu_par, dsu_rnk;
 int n, m;
 
+long long power (long long a, long long b) {
+    if (!b)
+        return (a != 0);
+
+    if (b & 1)
+        return power(a, b - 1) * a;
+
+    long long y = power(a, b >> 1);
+    return y * y;
+}
+
 int get_par (int a) {
     if (dsu_par[a] == a)
         return a;
@@ -246,7 +257,7 @@ void run_prim(int v, int max_heap_size, int current_components_amount, vector <b
             return;
         }
         used[u] = used_in_prim[u] = true;
-
+;
         for (int j = 0; j < graph[u].size(); j += 2) {
             long long to = graph[u][j];
             //cout << to << ' ';
@@ -348,7 +359,7 @@ long long count_mst_weight_log_star (std::ifstream & fin) {
 
             run_prim(v, max_heap_size, old_components.size(), used, connections, sum);
         }
-        max_heap_size <<= 1;
+        max_heap_size = power(2, max_heap_size);
         update_components(connections, old_components, new_components);
         for (int j = 0; j < old_components.size(); ++j)
             used[old_components[j]] = false;

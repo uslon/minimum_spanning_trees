@@ -19,8 +19,9 @@ long long run_prim (std::ifstream & fin, std::ofstream & fout, string & infile) 
     auto finish = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = finish - start;
 
-    fout << "Prim    " << res  << " Time: " << elapsed.count() << '\n';
+    fout << "Prim     " << res  << " Time: " << elapsed.count() << '\n';
     fin.close();
+    return res;
 }
 
 long long run_kruskal (std::ifstream & fin, std::ofstream & fout, string & infile) {
@@ -30,8 +31,9 @@ long long run_kruskal (std::ifstream & fin, std::ofstream & fout, string & infil
     auto finish = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = finish - start;
 
-    fout << "Kruskal " << res  << " Time: " << elapsed.count() << '\n';
+    fout << "Kruskal  " << res  << " Time: " << elapsed.count() << '\n';
     fin.close();
+    return res;
 }
 
 long long run_boruvka (std::ifstream & fin, std::ofstream & fout, string & infile) {
@@ -41,8 +43,32 @@ long long run_boruvka (std::ifstream & fin, std::ofstream & fout, string & infil
     auto finish = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = finish - start;
 
-    fout << "Boruvka " << res  << " Time: " << elapsed.count() << '\n';
+    fout << "Boruvka  " << res  << " Time: " << elapsed.count() << '\n';
     fin.close();
+    return res;
+}
+
+long long run_log_star (std::ifstream & fin, std::ofstream & fout, string & infile) {
+    fin.open(infile);
+    auto start = std::chrono::high_resolution_clock::now();
+    long long res = count_mst_weight_log_star(fin);
+    auto finish = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = finish - start;
+
+    fout << "Log star " << res  << " Time: " << elapsed.count() << '\n';
+    fin.close();
+    return res;
+}
+
+
+TEST(power, first) {
+    EXPECT_EQ(9, power(3, 2));
+    EXPECT_EQ(343, power(7, 3));
+    EXPECT_EQ(216, power(6, 3));
+    EXPECT_EQ(625, power(5, 4));
+    EXPECT_EQ(0, power(0, 4));
+    EXPECT_EQ(1, power(1, 4));
+    EXPECT_EQ(1, power(345, 0));
 }
 
 
@@ -60,9 +86,11 @@ TEST(sample, first) {
     const long long prim_res = run_prim(fin, fout, infile);
     const long long kruskal_res = run_kruskal(fin, fout, infile);
     const long long boruvka_res = run_boruvka(fin, fout, infile);
+    const long long log_star_res = run_log_star(fin, fout, infile);
 
     EXPECT_EQ(prim_res, boruvka_res);
     EXPECT_EQ(prim_res, kruskal_res);
+    EXPECT_EQ(prim_res, log_star_res);
 }
 
 TEST(sample, second) {
@@ -79,9 +107,11 @@ TEST(sample, second) {
     const long long prim_res = run_prim(fin, fout, infile);
     const long long kruskal_res = run_kruskal(fin, fout, infile);
     const long long boruvka_res = run_boruvka(fin, fout, infile);
+    const long long log_star_res = run_log_star(fin, fout, infile);
 
     EXPECT_EQ(prim_res, boruvka_res);
     EXPECT_EQ(prim_res, kruskal_res);
+    EXPECT_EQ(prim_res, log_star_res);
 }
 
 TEST(sample, third) {
@@ -98,9 +128,11 @@ TEST(sample, third) {
     const long long prim_res = run_prim(fin, fout, infile);
     const long long kruskal_res = run_kruskal(fin, fout, infile);
     const long long boruvka_res = run_boruvka(fin, fout, infile);
+    const long long log_star_res = run_log_star(fin, fout, infile);
 
     EXPECT_EQ(prim_res, boruvka_res);
     EXPECT_EQ(prim_res, kruskal_res);
+    EXPECT_EQ(prim_res, log_star_res);
 }
 
 
@@ -118,9 +150,11 @@ TEST(strong, first) {
     const long long prim_res = run_prim(fin, fout, infile);
     const long long kruskal_res = run_kruskal(fin, fout, infile);
     const long long boruvka_res = run_boruvka(fin, fout, infile);
+    const long long log_star_res = run_log_star(fin, fout, infile);
 
     EXPECT_EQ(prim_res, boruvka_res);
     EXPECT_EQ(prim_res, kruskal_res);
+    EXPECT_EQ(prim_res, log_star_res);
 }
 
 
@@ -138,9 +172,11 @@ TEST(strong, second) {
     const long long prim_res = run_prim(fin, fout, infile);
     const long long kruskal_res = run_kruskal(fin, fout, infile);
     const long long boruvka_res = run_boruvka(fin, fout, infile);
+    const long long log_star_res = run_log_star(fin, fout, infile);
 
     EXPECT_EQ(prim_res, boruvka_res);
     EXPECT_EQ(prim_res, kruskal_res);
+    EXPECT_EQ(prim_res, log_star_res);
 }
 
 
@@ -158,9 +194,11 @@ TEST(strong, third) {
     const long long prim_res = run_prim(fin, fout, infile);
     const long long kruskal_res = run_kruskal(fin, fout, infile);
     const long long boruvka_res = run_boruvka(fin, fout, infile);
+    const long long log_star_res = run_log_star(fin, fout, infile);
 
     EXPECT_EQ(prim_res, boruvka_res);
     EXPECT_EQ(prim_res, kruskal_res);
+    EXPECT_EQ(prim_res, log_star_res);
 }
 
 TEST(strong, forfth) {
@@ -177,9 +215,11 @@ TEST(strong, forfth) {
     const long long prim_res = run_prim(fin, fout, infile);
     const long long kruskal_res = run_kruskal(fin, fout, infile);
     const long long boruvka_res = run_boruvka(fin, fout, infile);
+    const long long log_star_res = run_log_star(fin, fout, infile);
 
     EXPECT_EQ(prim_res, boruvka_res);
     EXPECT_EQ(prim_res, kruskal_res);
+    EXPECT_EQ(prim_res, log_star_res);
 }
 
 
@@ -197,7 +237,9 @@ TEST(special, similar_to_tree) {
     const long long prim_res = run_prim(fin, fout, infile);
     const long long kruskal_res = run_kruskal(fin, fout, infile);
     const long long boruvka_res = run_boruvka(fin, fout, infile);
+    const long long log_star_res = run_log_star(fin, fout, infile);
 
     EXPECT_EQ(prim_res, boruvka_res);
     EXPECT_EQ(prim_res, kruskal_res);
+    EXPECT_EQ(prim_res, log_star_res);
 }
